@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 router.put('/', (req, res) => {
     const { movie } = req.body;
     const { id } = _.uniqueId();
-    user.push({movie, id});
+    movies.push({movie, id});
     res.json({
         message: 'User added! ${id}',
         users: {movie, id}
@@ -43,7 +43,7 @@ router.post('/:id',(req, res) =>{
     movieToUpdate.movie = movie;
 
     res.json({
-        message: 'Movie updated! ${id} with ${user}'
+        message: 'Movie updated! &{id} with ${user}'
     });
 });
 
@@ -59,7 +59,7 @@ module.exports = router;
 
 let movies = [{
     id: '0',
-    movie: 'spirited away',
+    movie: 'Le voyage de Chihiro',
     yearOfRelease: 2001,
     duration: 125, // en minutes,
     actors: ['Rumi Hiiragi', 'Miyu Irino'],
@@ -68,20 +68,20 @@ let movies = [{
     rottenTomatoesScore: 97
 },{
     id: '1',
-    movie: 'se',
-    yearOfRelease: 12,
-    duration: 2, // en minutes,
-    actors: [' LOLO', ' OUI'],
-    poster: "chihiro.png" , // lien vers une image d'affiche,
-    boxOffice: 1,// en USD$,
-    rottenTomatoesScore: 2
+    movie: 'insidious',
+    yearOfRelease: 2010,
+    duration: 102,
+    actors: [' Patrick Wilson', ' Rose Byrne'],
+    poster: "insidious.png" , // lien vers une image d'affiche,
+    boxOffice: 99557032,// en USD$,
+    rottenTomatoesScore: 66
  },{
     id: '2',
-    movie: 'maman',
-    yearOfRelease: 10,
-    duration: 203, // en minutes,
-    actors: [' ZJFS', ' OLJLUI'],
-    poster: "chihiro.png" , // lien vers une image d'affiche,
-    boxOffice: 1,// en USD$,
-    rottenTomatoesScore: 2
+    movie: 'sacré graal',
+    yearOfRelease: 1975,
+    duration: 91, // en minutes,
+    actors: [' John Cleese ', ' Graham Chapman'],
+    poster: "montiPython.png" , // lien vers une image d'affiche,
+    boxOffice: 1940906,// en USD$,
+    rottenTomatoesScore: 97
 }];
