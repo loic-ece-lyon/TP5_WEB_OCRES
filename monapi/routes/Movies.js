@@ -33,6 +33,28 @@ router.put('/', (req, res) => {
 });
 
 
+/*    UPDATE           */
+
+router.post('/:id',(req, res) =>{
+    const { id } = req.params;
+    const { movie } = req.body;
+
+    const movieToUpdate = _.find(movie, ["id", id]);
+    movieToUpdate.movie = movie;
+
+    res.json({
+        message: 'Movie updated! ${id} with ${user}'
+    });
+});
+
+/*   Delete    */
+
+router.delete('/:id',(req,res) =>{
+    const{ id } = req.params;
+    _.remove(movies, ["id", id]);
+    res.json({ message: "just remove ${id}"});
+});
+
 module.exports = router;
 
 let movies = [{
