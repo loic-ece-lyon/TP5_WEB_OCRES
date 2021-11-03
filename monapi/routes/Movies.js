@@ -1,8 +1,37 @@
 
 
+const API_KEY = "561b72eb";
+// Url API
+const API_URL = "http://www.omdbapi.com/";
+
+
+class API_MOVIE{
+    constructor(movie){
+        movie= document.getElementById('movie-input').value;
+
+        // Si la ville n'est pas définit alors la ville par défault est Paris
+        if(movie === undefined){
+            movie = "paris";
+        }
+        this.movie = movie;
+    }
+}
+
+
+getmovie()
+{
+    return axios
+        .get(`${API_URL}?t=${this.movie}&api_key=${API_KEY}`,{
+        crossdomain: true
+    })
+}
+
+
+
 var express = require('express');
 var router = express.Router();
 var _ =require('lodash');
+var axios = require('axios');
 
 
 /* GET users listing. */
@@ -27,7 +56,7 @@ router.put('/', (req, res) => {
     const { id } = _.uniqueId();
     movies.push({movie, id});
     res.json({
-        message: 'User added! ${id}',
+        message: `User added! ${id}`,
         users: {movie, id}
     });
 });
@@ -43,7 +72,7 @@ router.post('/:id',(req, res) =>{
     movieToUpdate.movie = movie;
 
     res.json({
-        message: 'Movie updated! &{id} with ${user}'
+        message: `Movie updated! ${id} with ${user}`
     });
 });
 
@@ -52,7 +81,7 @@ router.post('/:id',(req, res) =>{
 router.delete('/:id',(req,res) =>{
     const{ id } = req.params;
     _.remove(movies, ["id", id]);
-    res.json({ message: "just remove ${id}"});
+    res.json({ message: `just remove ${id}`});
 });
 
 module.exports = router;
