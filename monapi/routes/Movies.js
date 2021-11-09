@@ -5,33 +5,11 @@ const API_KEY = "561b72eb";
 const API_URL = "http://www.omdbapi.com/";
 
 
-class API_MOVIE{
-    constructor(movie){
-        movie= document.getElementById('movie-input').value;
-
-        // Si la ville n'est pas définit alors la ville par défault est Paris
-        if(movie === undefined){
-            movie = "paris";
-        }
-        this.movie = movie;
-    }
-}
-
-
-getmovie()
-{
-    return axios
-        .get(`${API_URL}?t=${this.movie}&api_key=${API_KEY}`,{
-        crossdomain: true
-    })
-}
-
-
-
 var express = require('express');
 var router = express.Router();
 var _ =require('lodash');
 var axios = require('axios');
+var qs = require('qs');
 
 
 /* GET users listing. */
@@ -68,12 +46,37 @@ router.post('/:id',(req, res) =>{
     const { id } = req.params;
     const { movie } = req.body;
 
-    const movieToUpdate = _.find(movie, ["id", id]);
+    const movieToUpdate = _.find(movies, ["id", id]);
     movieToUpdate.movie = movie;
 
     res.json({
-        message: `Movie updated! ${id} with ${user}`
+        message: `Movie updated! ${id} with ${movie}`
     });
+});
+
+router.put('/', (req, res) =>{
+
+    var data = qs.stringify({
+        'id': '3'
+    });
+    var config = {
+        method: 'put',
+        url: 'http://localhost:3000/movies',
+        headers: {
+            'api_key' :'561b72eb'
+        },
+        data : data
+    };
+
+    axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 });
 
 /*   Delete    */
